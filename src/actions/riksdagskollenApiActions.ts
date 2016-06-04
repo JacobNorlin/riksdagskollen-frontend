@@ -1,0 +1,15 @@
+import {CALL_RIKSDAGSKOLLEN_API} from '../api.ts'
+
+export const RIKSDAGSKOLLEN_FETCH_REQUEST = 'RIKSDAGSKOLLEN_FETCH_REQUEST'
+export const RIKSDAGSKOLLEN_FETCH_SUCCESS = 'RIKSDAGSKOLLEN_FETCH_SUCCESS'
+export const RIKSDAGSKOLLEN_FETCH_ERROR = 'RIKSDAGSKOLLEN_FETCH_ERROR'
+
+export function fetchPeople(): any{
+    return {
+        [CALL_RIKSDAGSKOLLEN_API]:{
+            endpoint: 'person',
+            types:[RIKSDAGSKOLLEN_FETCH_REQUEST, RIKSDAGSKOLLEN_FETCH_SUCCESS, RIKSDAGSKOLLEN_FETCH_ERROR],
+            method: 'GET'
+        }
+    }
+}
