@@ -1,45 +1,43 @@
 import {RIKSDAGSKOLLEN_FETCH_REQUEST, RIKSDAGSKOLLEN_FETCH_SUCCESS, RIKSDAGSKOLLEN_FETCH_ERROR} from '../actions/riksdagskollenApiActions.ts'
 import * as _ from 'lodash'
 import {Person} from '../types/person.ts'
+import {Action} from './main'
 
-
-
-interface IRiksdagskollenApiData{
-    people: Array<Person>//something
+interface ApiCallState {
+    isFetching: boolean
+    apiData: {
+        people: Person[]
+    }
 }
 
-interface IRiksdagskollenApiCallState{
-    isFetching:boolean
-    apiData: IRiksdagskollenApiData
-}
-
-function initialState(): IRiksdagskollenApiCallState{
+const getInitialState = (): ApiCallState => {
     return {
         isFetching: false,
-        apiData:{
+        apiData: {
             people: []
         }
     }
 }
 
-export default function riksdagskollenApiCall(state: IRiksdagskollenApiCallState = initialState(), action: any) : any{
-    switch(action.type){
+interface ApiCallAction extends Action {
+    response: string
+}
+
+const apiCall = (state: ApiCallState = getInitialState(), action: ApiCallAction): ApiCallState => {
+    switch (action.type) {
         case RIKSDAGSKOLLEN_FETCH_REQUEST:
-        {
-            return _.assign({}, state, {
+            return _.assign<{}, ApiCallState>({}, state, {
                 isFetching: true
             })
-        }
         case RIKSDAGSKOLLEN_FETCH_SUCCESS:
-        {
-            return _.assign({}, state, {
+            return _.assign<{}, ApiCallState>({}, state, {
                 isFetching: false,
-                apiData:{
-                    people: JSON.parse(action.response) 
+                apiData: {
+                    people: JSON.parse(action.response)
                 }
             })
-        }
-        default:
-            return state
     }
+    return state
 }
+
+export default apiCall
