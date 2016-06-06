@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import {Person} from '../types/person.ts'
-import {IVisualizationState} from '../reducers/visualizationReducer.ts'
+import {VisualizationState} from '../reducers/visualizationReducer.ts'
 import * as React from 'react'
 
 interface IPersonPanelProps{

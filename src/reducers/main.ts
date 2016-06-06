@@ -1,5 +1,5 @@
-import riksdagskollenApiCall from './riksdagskollenApiReducer.ts'
-import visualizationReducer from './visualizationReducer.ts'
+import riksdagskollenApiCall from './apiReducer'
+import visualizationReducer from './visualizationReducer'
 import {combineReducers} from 'redux'
 
 interface Action {

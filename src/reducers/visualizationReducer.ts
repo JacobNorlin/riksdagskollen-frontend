@@ -1,25 +1,35 @@
-import {PERSON_SELECTED} from '../actions/visualizationActions.ts'
-import {Person} from '../types/person.ts'
+import {PERSON_SELECTED} from '../actions/visualizationActions'
+import {Person} from '../types/person'
 import * as _ from 'lodash'
+import {Action} from './main'
 
-export interface IVisualizationState{
+interface VisualizationState{
     selectedPerson: Person
 }
 
-function initialState(): IVisualizationState{
+interface VisualizationAction extends Action {
+    person: Person
+}
+
+const getInitialState = (): VisualizationState => {
     return {
         selectedPerson: undefined
     }
 }
 
-export default function visualizationReducer(state: IVisualizationState = initialState(), action: any){
+export {VisualizationState}
+
+const reducer = (
+    state: VisualizationState = getInitialState(),
+    action: VisualizationAction): VisualizationState => {
     switch(action.type){
         case PERSON_SELECTED:{
-            return _.assign({}, state, {
+            return _.assign<{}, VisualizationState>({}, state, {
                 selectedPerson: action.person
             })
         }
-        default: 
-            return state
     }
+    return state
 }
+
+export default reducer

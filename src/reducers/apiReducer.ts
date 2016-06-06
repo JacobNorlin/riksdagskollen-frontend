@@ -1,6 +1,10 @@
-import {RIKSDAGSKOLLEN_FETCH_REQUEST, RIKSDAGSKOLLEN_FETCH_SUCCESS, RIKSDAGSKOLLEN_FETCH_ERROR} from '../actions/riksdagskollenApiActions.ts'
+import {
+    RIKSDAGSKOLLEN_FETCH_REQUEST,
+    RIKSDAGSKOLLEN_FETCH_SUCCESS,
+    RIKSDAGSKOLLEN_FETCH_ERROR
+} from '../actions/riksdagskollenApiActions'
 import * as _ from 'lodash'
-import {Person} from '../types/person.ts'
+import {Person} from '../types/person'
 import {Action} from './main'
 
 interface ApiCallState {
