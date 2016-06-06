@@ -16,7 +16,6 @@ function callRiksdagskollenApi(endpoint: string, method: string) {
             .text()
             .then((text:string) => ({text, response}))
         ).then(({ text, response }) => {
-            console.log(response)
             if (!response.ok) {
                 return Promise.reject(text)
             }

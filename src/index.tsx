@@ -10,7 +10,7 @@ import {Provider, connect} from 'react-redux'
 import app from './reducers/main.ts'
 import thunkMiddleware from 'redux-thunk'
 
-import riksdagskollenApi from './api.ts'
+import riksdagskollenApi from './api/api.ts'
 import Test from './components/Test.tsx'
 
 // require less file to trigger webpack's less-loader

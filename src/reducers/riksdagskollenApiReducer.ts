@@ -1,8 +1,11 @@
 import {RIKSDAGSKOLLEN_FETCH_REQUEST, RIKSDAGSKOLLEN_FETCH_SUCCESS, RIKSDAGSKOLLEN_FETCH_ERROR} from '../actions/riksdagskollenApiActions.ts'
 import * as _ from 'lodash'
+import {Person} from '../types/person.ts'
+
+
 
 interface IRiksdagskollenApiData{
-    people: Array<any>//something
+    people: Array<Person>//something
 }
 
 interface IRiksdagskollenApiCallState{
