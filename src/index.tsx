@@ -17,7 +17,6 @@ import Test from './components/Test.tsx'
 require('./less/style.less')
 
 
-
 let createStoreWithMiddleware = Redux.applyMiddleware(thunkMiddleware, riksdagskollenApi)(Redux.createStore)
 
 let store = createStoreWithMiddleware(app)
