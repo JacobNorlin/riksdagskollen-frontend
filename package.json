@@ -21,7 +21,6 @@
     "fabric": "1.5.0",
     "html-webpack-plugin": "^2.19.0",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^2.2.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash": "^4.13.1",
