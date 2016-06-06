@@ -1,12 +1,17 @@
 import {Promise} from 'es6-promise'
 import * as fetch from 'isomorphic-fetch'
-import {Action} from '../reducers/main'
-import {isRequestAction, RequestAction, ResponseAction, Status, Type, Endpoint} from '../actions/riksdagskollenApiActions'
+import {Action, ActionType, isActionOfType} from '../reducers/main'
+import {
+    RequestAction,
+    ResponseAction,
+    Status,
+    Endpoint
+} from '../actions/riksdagskollenApiActions'
 
 const API_BASE_URL = 'http://api.riksdagskollen.se'
 
 const send = (method: string, endpoint: string): PromiseLike<string> => {
-    var init: RequestInit = { method }
+    const init: RequestInit = { method }
 
     const promise = fetch(API_BASE_URL + endpoint, init).then(response => {
         return response.text().then(text => ({ text, response }))
@@ -20,7 +25,7 @@ const send = (method: string, endpoint: string): PromiseLike<string> => {
 }
 
 const middleware: Redux.Middleware = (store: Redux.Store) => (next: Redux.Dispatch) => (action: Action) => {
-    if (!isRequestAction(action)) {
+    if (!isActionOfType<RequestAction>(action, ActionType.Request)) {
         return next(action)
     }
     const r = action as RequestAction
@@ -34,14 +39,14 @@ const middleware: Redux.Middleware = (store: Redux.Store) => (next: Redux.Dispat
 
     return send('GET', endpointUrl).then(body => {
         const action: ResponseAction = {
-            type: Type.Response,
+            type: ActionType.Response,
             status: Status.Success,
             body: body
         }
         next(action)
     }, e => {
         const action: ResponseAction = {
-            type: Type.Response,
+            type: ActionType.Response,
             status: Status.Error,
             body: e.message
         }

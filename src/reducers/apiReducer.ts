@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import {Person} from '../types/person'
-import {Action} from './main'
-import {ResponseAction, Status, isResponseAction} from '../actions/riksdagskollenApiActions'
+import {Action, ActionType, isActionOfType} from './main'
+import {ResponseAction, Status} from '../actions/riksdagskollenApiActions'
 
 interface ApiCallState {
     isFetching: boolean
@@ -21,7 +21,7 @@ const getInitialState = (): ApiCallState => {
 
 const reducer = (state: ApiCallState = getInitialState(), action: Action): ApiCallState => {
 
-    if (!isResponseAction(action)) {
+    if (!isActionOfType<ResponseAction>(action, ActionType.Response)) {
         return state
     }
 

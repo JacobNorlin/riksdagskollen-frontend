@@ -1,10 +1,15 @@
 import {Person} from '../types/person.ts'
+import {Action, ActionType} from '../reducers/main'
 
-export const PERSON_SELECTED = 'PERSON_SELECTED'
+interface SelectPersonAction extends Action {
+    person: Person
+}
 
-export function selectPerson(person: Person): any{
+const selectPerson = (person: Person): SelectPersonAction => {
     return {
+        type: ActionType.PersonSelected,
         person: person,
-        type: PERSON_SELECTED
     }
 }
+
+export {selectPerson}

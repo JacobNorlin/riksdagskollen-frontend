@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {fetch, Endpoint} from '../actions/riksdagskollenApiActions.ts'
+import {createFetchAction, Endpoint} from '../actions/riksdagskollenApiActions.ts'
 import * as d3 from 'd3'
 import * as _ from 'lodash'
 import {Person, partyColor} from '../types/person.ts'
@@ -33,7 +33,7 @@ class Test extends React.Component<ITestProps, void>{
     componentWillMount(){
         console.log("lol")
         const {dispatch} = this.props
-        dispatch(fetch(Endpoint.Person))
+        dispatch(createFetchAction(Endpoint.Person))
     }
     
     componentDidMount(){

@@ -1,9 +1,4 @@
-import {Action} from '../reducers/main'
-
-const Type = {
-    Request: 'ACTION_REQUEST',
-    Response: 'ACTION_RESPONSE',
-}
+import {Action, ActionType} from '../reducers/main'
 
 enum Status {
     Success,
@@ -23,23 +18,17 @@ interface ResponseAction extends Action {
     body: string
 }
 
-const isRequestAction = (action: Action): action is RequestAction => action.type === Type.Request
-const isResponseAction = (action: Action): action is ResponseAction => action.type === Type.Response
-
-const fetch = (endpoint: Endpoint): RequestAction => {
+const createFetchAction = (endpoint: Endpoint): RequestAction => {
     return {
-        type: Type.Request,
+        type: ActionType.Request,
         endpoint: endpoint,
     }
 }
 
 export {
-    Type,
     Endpoint,
-    RequestAction,
-    ResponseAction, 
-    isRequestAction,
-    isResponseAction,
-    fetch,
     Status,
+    RequestAction,
+    ResponseAction,
+    createFetchAction,
 }

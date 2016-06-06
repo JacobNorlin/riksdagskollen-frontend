@@ -1,9 +1,8 @@
-import {PERSON_SELECTED} from '../actions/visualizationActions'
 import {Person} from '../types/person'
 import * as _ from 'lodash'
-import {Action} from './main'
+import {Action, ActionType} from './main'
 
-interface VisualizationState{
+interface VisualizationState {
     selectedPerson: Person
 }
 
@@ -22,12 +21,11 @@ export {VisualizationState}
 const reducer = (
     state: VisualizationState = getInitialState(),
     action: VisualizationAction): VisualizationState => {
-    switch(action.type){
-        case PERSON_SELECTED:{
+    switch (action.type) {
+        case ActionType.PersonSelected:
             return _.assign<{}, VisualizationState>({}, state, {
                 selectedPerson: action.person
             })
-        }
     }
     return state
 }
