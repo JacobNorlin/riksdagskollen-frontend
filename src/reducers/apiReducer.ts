@@ -1,11 +1,7 @@
-import {
-    RIKSDAGSKOLLEN_FETCH_REQUEST,
-    RIKSDAGSKOLLEN_FETCH_SUCCESS,
-    RIKSDAGSKOLLEN_FETCH_ERROR
-} from '../actions/riksdagskollenApiActions'
 import * as _ from 'lodash'
 import {Person} from '../types/person'
 import {Action} from './main'
+import {ResponseAction, Status, isResponseAction} from '../actions/riksdagskollenApiActions'
 
 interface ApiCallState {
     isFetching: boolean
@@ -23,25 +19,24 @@ const getInitialState = (): ApiCallState => {
     }
 }
 
-interface ApiCallAction extends Action {
-    response: string
-}
+const reducer = (state: ApiCallState = getInitialState(), action: Action): ApiCallState => {
 
-const apiCall = (state: ApiCallState = getInitialState(), action: ApiCallAction): ApiCallState => {
-    switch (action.type) {
-        case RIKSDAGSKOLLEN_FETCH_REQUEST:
-            return _.assign<{}, ApiCallState>({}, state, {
-                isFetching: true
-            })
-        case RIKSDAGSKOLLEN_FETCH_SUCCESS:
+    if (!isResponseAction(action)) {
+        return state
+    }
+
+    const r = action as ResponseAction
+
+    switch (r.status) {
+        case Status.Success:
             return _.assign<{}, ApiCallState>({}, state, {
                 isFetching: false,
                 apiData: {
-                    people: JSON.parse(action.response)
+                    people: JSON.parse(r.body)
                 }
             })
     }
     return state
 }
 
-export default apiCall
+export default reducer

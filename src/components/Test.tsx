@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {fetchPeople} from '../actions/riksdagskollenApiActions.ts'
+import {fetch, Endpoint} from '../actions/riksdagskollenApiActions.ts'
 import * as d3 from 'd3'
 import * as _ from 'lodash'
 import {Person, partyColor} from '../types/person.ts'
@@ -23,7 +23,7 @@ function mapStateToProps(state:any): any{
 }
 
 
-class Test extends React.Component<ITestProps, {}>{
+class Test extends React.Component<ITestProps, void>{
     
     svg: any = undefined
     w: number = 1000
@@ -33,7 +33,7 @@ class Test extends React.Component<ITestProps, {}>{
     componentWillMount(){
         console.log("lol")
         const {dispatch} = this.props
-        dispatch(fetchPeople())
+        dispatch(fetch(Endpoint.Person))
     }
     
     componentDidMount(){
