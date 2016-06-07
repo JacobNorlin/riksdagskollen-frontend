@@ -1,12 +1,12 @@
 import {Promise} from 'es6-promise'
 import * as fetch from 'isomorphic-fetch'
-import {Action, ActionType, isActionOfType} from '../reducers/main'
+import {Action, ActionType, isActionOfType} from '../actions/common'
 import {
     RequestAction,
     ResponseAction,
     Status,
     Endpoint
-} from '../actions/riksdagskollenApiActions'
+} from '../actions/api'
 
 const API_BASE_URL = 'http://api.riksdagskollen.se'
 

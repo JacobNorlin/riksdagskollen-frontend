@@ -1,4 +1,4 @@
-import {Action, ActionType} from '../reducers/main'
+import {Action, ActionType} from './common'
 
 enum Status {
     Success,

@@ -1,7 +1,3 @@
-import riksdagskollenApiCall from './apiReducer'
-import visualizationReducer from './visualizationReducer'
-import {combineReducers} from 'redux'
-
 enum ActionType {
     Request,
     Response,
@@ -17,4 +13,3 @@ const isActionOfType = <T extends Action>(action: Action, type: ActionType): act
 }
 
 export {Action, ActionType, isActionOfType}
-export default combineReducers({riksdagskollenApiCall, visualizationReducer})

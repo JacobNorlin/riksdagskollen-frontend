@@ -1,27 +1,18 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
-import {createFetchAction, Endpoint} from '../actions/riksdagskollenApiActions.ts'
+import {createFetchAction, Endpoint} from '../actions/api'
+import {selectPerson} from '../actions/visualization'
 import * as d3 from 'd3'
 import * as _ from 'lodash'
-import {Person, partyColor} from '../types/person.ts'
-import PersonPanel from './PersonPanel.tsx'
-import {selectPerson} from '../actions/visualizationActions.ts'
+import {Person, partyColor} from '../types/person'
+import PersonPanel from './PersonPanel'
+import {AppState} from '../reducers/common'
 
 interface ITestProps {
-    dispatch?: Function,
-    people?: any,
-    isFetching?: boolean
+    dispatch: Redux.Dispatch,
+    people: Person[],
+    isFetching: boolean
 }
-function mapStateToProps(state:any): any{
-    const {riksdagskollenApiCall} = state
-    const {apiData, isFetching} = riksdagskollenApiCall
-    const {people} = apiData
-    return {
-        isFetching,
-        people
-    }
-}
-
 
 class Test extends React.Component<ITestProps, void>{
     
@@ -102,7 +93,7 @@ class Test extends React.Component<ITestProps, void>{
        
     }
     
-    render(): any{
+    render(): JSX.Element {
         
         return <div id="d3root">
             <button onClick={() => {this.circlePosition(this.circles)}}>circle</button>
@@ -111,5 +102,12 @@ class Test extends React.Component<ITestProps, void>{
         </div>
     }
 }
-    
+
+const mapStateToProps = (state: AppState) => {
+    return {
+        isFetching: state.api.isFetching,
+        people: state.api.people
+    }
+}
+
 export default connect(mapStateToProps)(Test)

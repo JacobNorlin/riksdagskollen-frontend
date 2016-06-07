@@ -1,5 +1,5 @@
-import {Person} from '../types/person.ts'
-import {Action, ActionType} from '../reducers/main'
+import {Person} from '../types/person'
+import {Action, ActionType} from './common'
 
 interface SelectPersonAction extends Action {
     person: Person
@@ -12,4 +12,4 @@ const selectPerson = (person: Person): SelectPersonAction => {
     }
 }
 
-export {selectPerson}
+export {selectPerson, SelectPersonAction}
