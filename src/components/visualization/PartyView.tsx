@@ -59,6 +59,7 @@ class PartyView extends React.Component<PartyViewProps, {}>{
     createBalls(people: Person[], positions: Coord[]): MemberBall[]{
         const {dispatch} = this.props
         return _(people)
+        .sortBy('party')
         .zipWith(positions, (person: Person, position: Coord) => {
             return {person, position}
         })
@@ -82,7 +83,7 @@ class PartyView extends React.Component<PartyViewProps, {}>{
         return <div>
             <button onClick={() => {dispatch(updatePositions(this.basePosition(people)))}}>base</button>
             <button onClick={() => {dispatch(updatePositions(this.circlePosition(people)))}}>circle</button>
-            <svg width={1000} height={1000}>{this.createBalls(people, positions)} </svg>
+            <svg width={1000} height={600}>{this.createBalls(people, positions)} </svg>
         </div>
     }   
 }
