@@ -5,7 +5,7 @@ import * as d3 from 'd3'
 import * as _ from 'lodash'
 import {Person, partyColor} from '../types/person.ts'
 import PersonPanel from './PersonPanel.tsx'
-import {selectPerson} from '../actions/visualizationActions.ts'
+import PartyView from '../visualization/PartyView.tsx'
 
 interface ITestProps {
     dispatch?: Function,
@@ -31,9 +31,8 @@ class Test extends React.Component<ITestProps, {}>{
     circles: any = undefined
     
     componentWillMount(){
-        console.log("lol")
         const {dispatch} = this.props
-        dispatch(fetchPeople())
+        //dispatch(fetchPeople())
     }
     
     componentDidMount(){
@@ -96,7 +95,7 @@ class Test extends React.Component<ITestProps, {}>{
             .attr("cy", 0)
         
         
-        this.basePosition(this.circles)
+        //this.basePosition(this.circles)
         
         
        
@@ -108,6 +107,7 @@ class Test extends React.Component<ITestProps, {}>{
             <button onClick={() => {this.circlePosition(this.circles)}}>circle</button>
             <button onClick={() => {this.basePosition(this.circles)}}>base</button>
             <PersonPanel/>
+            <PartyView />
         </div>
     }
 }
