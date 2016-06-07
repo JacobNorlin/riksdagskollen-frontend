@@ -8,7 +8,6 @@ import * as _ from 'lodash'
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
-import apiMiddleware from './middleware/api'
 import Test from './components/Test'
 import {reducer, getInitialState} from './reducers/common'
 
@@ -17,7 +16,7 @@ require('./less/style.less')
 
 let rootElement = document.getElementById('app')
 
-const store = createStore(reducer, getInitialState(), applyMiddleware(thunkMiddleware, apiMiddleware))
+const store = createStore(reducer, getInitialState(), applyMiddleware(thunkMiddleware))
 
 ReactDOM.render(
     <Provider store={store}>
