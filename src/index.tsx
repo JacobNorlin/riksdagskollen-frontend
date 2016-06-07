@@ -4,8 +4,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import * as _ from 'lodash'
-import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import Test from './components/Test'
