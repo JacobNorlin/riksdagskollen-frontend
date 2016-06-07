@@ -1,21 +1,20 @@
 import {Component} from 'react'
 import {connect} from 'react-redux'
-import {Person} from '../types/person.ts'
-import {IVisualizationState} from '../reducers/visualizationReducer.ts'
+import {Person} from '../types/person'
+import {VisualizationState} from '../reducers/visualization'
 import * as React from 'react'
+import {AppState} from '../reducers/common'
 
 interface IPersonPanelProps{
-    dispatch?: Function,
     selectedPerson?: Person
 }
-
 
 class PersonPanel extends Component<IPersonPanelProps, {}>{
     
     render(){
         const {selectedPerson} = this.props
         if(selectedPerson === undefined){
-            return <b>LMAO</b>
+            return <b>Select someone to get a panel</b>
         }
         return <div className="panel panel-default">
             <div className="panel-heading">
@@ -35,11 +34,9 @@ class PersonPanel extends Component<IPersonPanelProps, {}>{
 }
 
 
-function mapStateToProps(state: any): IPersonPanelProps{
-    const {visualizationReducer} = state
-    const {selectedPerson} = visualizationReducer
-    return{
-        selectedPerson
+const mapStateToProps = (state: AppState): IPersonPanelProps => {
+    return {
+        selectedPerson: state.visualization.selectedPerson
     }
 }
 

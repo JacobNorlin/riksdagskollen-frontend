@@ -1,41 +1,21 @@
 type Party = "M" | "S" | "V" | "SD" | "L" | "MP" | "KD" | "C" | "KD" | "-"
+export interface Coord {x:number, y: number}
 
-export function partyColor(p: Party){
-    switch(p){
-        case "M": {
-            return "#52bcee"
-        }
-        case "S": {
-            return "#fc1921"
-        }
-        case "L": {
-            return "#082171"
-        }
-        case "MP": {
-            return "#2c912c"
-        }
-        case "SD": {
-            return "#fedc01"
-        }
-        case "V": {
-            return "#ed1b24"
-        }
-        case "KD": {
-            return "#004d9f"
-        }
-        case "C": {
-            return "#008f3e"
-        }
-        default: return "black"
-    }
+export const PartyColor: {[key: string]: string} = {
+    M: '#52bcee',
+    S: '#fc1921',
+    L: '#082171',
+    MP: '#2c912c',
+    SD: '#fedc01',
+    V: '#ed1b24',
+    KD: '#004d9f',
+    C: '#008f3e',
 }
 
-enum Gender{
+enum Gender {
     Female = 0,
-    Male = 1
-    
+    Male = 1   
 }
-
 
 export interface Person {
     person_id: string,
