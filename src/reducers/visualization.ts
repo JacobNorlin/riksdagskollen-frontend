@@ -7,10 +7,6 @@ interface VisualizationState {
     selectedPerson: Person
 }
 
-interface VisualizationAction extends Action {
-    person: Person
-}
-
 const reducer = (state: VisualizationState, action: Action): VisualizationState => {
     if (!isActionOfType<SelectPersonAction>(action, ActionType.PersonSelected)) {
         return state
