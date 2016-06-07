@@ -39,10 +39,11 @@ class Test extends React.Component<ITestProps, void>{
         const member = 348
 
         circles
-            .transition(2000 + '')
+            .transition()
+            .duration(10000)
             .ease('linear')
-            .attr('cx', (p: Person, i: number) => origin.x + r * Math.cos(theta * (member - i) / member))
-            .attr('cy', (p: Person, i: number) => origin.y + r * Math.sin(theta * (member - i) / member))
+            .attr('cx', (p, i) => origin.x + r * Math.cos(theta * (member - i) / member))
+            .attr('cy', (p, i) => origin.y + r * Math.sin(theta * (member - i) / member))
             .attr('r', 3)
     }
 
@@ -57,11 +58,11 @@ class Test extends React.Component<ITestProps, void>{
             return Math.ceil(i / membersPerRow) * membersPerRow
         }
         circles
-            .transition(2000 + '')
+            .transition()
+            .duration(10000)
             .ease('linear')
-            .attr('cx', (p: Person, i: number) => origin.x + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.cos(theta * (member - round(i)) / member))
-            .attr('cy', (p: Person, i: number) => origin.y + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.sin(theta * (member - round(i)) / member))
-            .attr('r', 6)
+            .attr('cx', (p, i) => origin.x + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.cos(theta * (member - round(i)) / member))
+            .attr('cy', (p, i) => origin.y + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.sin(theta * (member - round(i)) / member))
     }
 
     componentDidUpdate() {
@@ -70,14 +71,8 @@ class Test extends React.Component<ITestProps, void>{
         let sortedByParties = _.chain(people).sortBy(p => p.party).value()
         this.circles = this.svg.selectAll('circle')
             .data(sortedByParties)
-            .enter()
-            .append('circle')
-            .attr('r', 6)
-            .on('click', (p: Person) => {
+            .on('click', p => {
                 dispatch(selectPerson(p))
-            })
-            .attr('fill', (p: Person) => {
-                return PartyColor[p.party]
             })
             .attr('cx', 0)
             .attr('cy', 0)
@@ -90,7 +85,11 @@ class Test extends React.Component<ITestProps, void>{
         return <div>
             <button onClick={() => { this.circlePosition(this.circles) } }>circle</button>
             <button onClick={() => { this.basePosition(this.circles) } }>base</button>
-            <svg width={this.w} height={this.h} ref={this.svgRef}></svg>
+            <svg width={this.w} height={this.h} ref={this.svgRef}>
+                {this.props.people.map(p => (
+                    <circle r={6} fill={PartyColor[p.party]} />
+                ))}
+            </svg>
             <PersonPanel/>
         </div>
     }
