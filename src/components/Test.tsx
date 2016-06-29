@@ -4,7 +4,7 @@ import {fetch, Endpoint} from '../actions/api'
 import {selectPerson} from '../actions/visualization'
 import * as d3 from 'd3'
 import * as _ from 'lodash'
-import {Person, PartyColor} from '../types/person'
+import {Person, PartyColor, Gender} from '../types/person'
 import PersonPanel from './PersonPanel'
 import {AppState} from '../reducers/common'
 
@@ -40,7 +40,7 @@ class Test extends React.Component<ITestProps, void>{
 
         circles
             .transition()
-            .duration(10000)
+            .duration(2000)
             .ease('linear')
             .attr('cx', (p, i) => origin.x + r * Math.cos(theta * (member - i) / member))
             .attr('cy', (p, i) => origin.y + r * Math.sin(theta * (member - i) / member))
@@ -57,12 +57,44 @@ class Test extends React.Component<ITestProps, void>{
         function round(i: number): number {
             return Math.ceil(i / membersPerRow) * membersPerRow
         }
-        circles
+        d3.selectAll('circle')
             .transition()
-            .duration(10000)
+            .duration(2000)
             .ease('linear')
             .attr('cx', (p, i) => origin.x + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.cos(theta * (member - round(i)) / member))
             .attr('cy', (p, i) => origin.y + (r - (i % membersPerRow) * distanceBetweenMembers) * Math.sin(theta * (member - round(i)) / member))
+    }
+
+    barPosition(){
+        function round(i: number): number {
+            return Math.ceil(i / 3) * 3
+        }
+        d3.selectAll('circle')
+            .transition()
+            .duration(2000)
+            .filter((p: Person) => {
+                return p.gender == Gender.Female
+            })
+            .attr('cx', (p:Person, i:number) => {
+                return 200
+            })
+            .attr('cy', (p:Person, i:number) => {
+                console.log( ((348 - round(i))))
+                return 500 - i*2
+            })
+        d3.selectAll('circle').filter((p: Person) => {
+            return p.gender == Gender.Male
+        })
+        .transition()
+        .duration(2000)
+        .attr('cx', (p:Person, i:number) => {
+                return 400
+            })
+            .attr('cy', (p:Person, i:number) => {
+                console.log( ((348 - round(i))))
+                return 500 - i*2
+            })
+
     }
 
     componentDidUpdate() {
@@ -83,7 +115,7 @@ class Test extends React.Component<ITestProps, void>{
     render(): JSX.Element {
 
         return <div>
-            <button onClick={() => { this.circlePosition(this.circles) } }>circle</button>
+            <button onClick={() => { this.barPosition() } }>circle</button>
             <button onClick={() => { this.basePosition(this.circles) } }>base</button>
             <svg width={this.w} height={this.h} ref={this.svgRef}>
                 {this.props.people.map(p => (
